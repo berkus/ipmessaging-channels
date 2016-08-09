@@ -18,6 +18,8 @@ import com.twilio.ipmessaging.Member;
 import com.twilio.ipmessaging.Message;
 import com.twilio.ipmessaging.IPMessagingClient;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +34,7 @@ public class MessagingActivity extends AppCompatActivity {
     */
     final static String SERVER_TOKEN_URL = "http://localhost:8000/token.php";
 
-    final static String DEFAULT_CHANNEL_NAME = "channels2";
+    final static String DEFAULT_CHANNEL_NAME = "channels" + new BigInteger(65, new SecureRandom()).toString(32);
     final static String TAG = "TwilioIPMessaging";
 
 
