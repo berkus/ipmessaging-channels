@@ -49,6 +49,7 @@ public class MessagingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
 
@@ -59,12 +60,14 @@ public class MessagingActivity extends AppCompatActivity {
     }
 
     private void retrieveAccessTokenfromServer() {
+        Log.d(TAG, "retrieveAccessTokenfromServer");
         Ion.with(this)
                 .load(SERVER_TOKEN_URL)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        Log.d(TAG, "Ion.onCompleted");
                         if (e == null) {
                             String identity = result.get("identity").getAsString();
                             String accessToken = result.get("token").getAsString();
@@ -82,7 +85,9 @@ public class MessagingActivity extends AppCompatActivity {
                             mMessagingClient = IPMessagingClient.create(getApplicationContext(), mAccessManager, props,
                                     mMessagingClientCallback);
 
+                            Log.d(TAG, "created mMessagingClient");
                         } else {
+                            Log.e(TAG, "Error syncing", e);
                             Toast.makeText(MessagingActivity.this,
                                     R.string.error_retrieving_access_token, Toast.LENGTH_SHORT)
                                     .show();
